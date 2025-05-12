@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
@@ -81,7 +80,8 @@ const RegisterForm = () => {
     setIsLoading(true);
     
     try {
-      let userData = {
+      // Create a base userData object with properties common to all roles
+      const userData: any = {
         name,
         email,
         role,
@@ -91,31 +91,19 @@ const RegisterForm = () => {
       
       // Add role-specific fields
       if (role === 'shop_owner') {
-        userData = {
-          ...userData,
-          shopName,
-          shopDescription,
-          isApproved: false,
-        };
+        userData.shopName = shopName;
+        userData.shopDescription = shopDescription;
+        userData.isApproved = false;
       } else if (role === 'farmer') {
-        userData = {
-          ...userData,
-          farmName,
-          farmLocation,
-          farmDescription,
-          isApproved: false,
-        };
+        userData.farmName = farmName;
+        userData.farmLocation = farmLocation;
+        userData.farmDescription = farmDescription;
+        userData.isApproved = false;
       } else if (role === 'delivery_agent') {
-        userData = {
-          ...userData,
-          isAvailable: true,
-          isApproved: false,
-        };
+        userData.isAvailable = true;
+        userData.isApproved = false;
       } else if (role === 'delivery_admin') {
-        userData = {
-          ...userData,
-          isApproved: false,
-        };
+        userData.isApproved = false;
       }
       
       const success = await register(userData, password);

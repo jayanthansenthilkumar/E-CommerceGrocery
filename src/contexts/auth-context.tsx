@@ -7,7 +7,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string, role: UserRole) => Promise<boolean>;
   logout: () => void;
-  register: (userData: Partial<User>, password: string) => Promise<boolean>;
+  register: (userData: any, password: string) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -103,7 +103,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('prisonaUser');
   };
 
-  const register = async (userData: Partial<User>, password: string): Promise<boolean> => {
+  const register = async (userData: any, password: string): Promise<boolean> => {
     setIsLoading(true);
     
     // Simulate API call
