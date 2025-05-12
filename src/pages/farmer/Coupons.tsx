@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/dashboard/dashboard-layout";
@@ -201,7 +200,7 @@ const FarmerCoupons = () => {
       return;
     }
     
-    if (formData.value <= 0) {
+    if (typeof formData.value === 'number' && formData.value <= 0) {
       toast({
         title: "Error",
         description: "Discount value must be greater than zero.",
@@ -217,7 +216,8 @@ const FarmerCoupons = () => {
           ? { 
               ...coupon, 
               ...formData,
-              usageLimit: formData.usageLimit === "" ? null : formData.usageLimit
+              usageLimit: formData.usageLimit === "" ? null : 
+                typeof formData.usageLimit === 'number' ? formData.usageLimit : null
             }
           : coupon
       ));
@@ -230,7 +230,8 @@ const FarmerCoupons = () => {
       const newCoupon: Coupon = {
         id: String(Math.floor(Math.random() * 10000)),
         ...formData,
-        usageLimit: formData.usageLimit === "" ? null : formData.usageLimit,
+        usageLimit: formData.usageLimit === "" ? null : 
+          typeof formData.usageLimit === 'number' ? formData.usageLimit : null,
         usedCount: 0,
         status: "active"
       };
