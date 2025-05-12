@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,29 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for Prisona Store
+				prisona: {
+					50: '#f2f9f4',
+					100: '#e6f3e9',
+					200: '#c8e7d3',
+					300: '#a1d6b1',
+					400: '#71bd86',
+					500: '#4fa364',
+					600: '#3a874d',
+					700: '#2e6c3f',
+					800: '#285735',
+					900: '#1a3f25',
+					950: '#0d2414',
+				},
+				organic: {
+					light: '#F2FCE2',
+					DEFAULT: '#81C784',
+					dark: '#2E7D32',
+				},
+				earth: {
+					DEFAULT: '#A1887F',
+					light: '#D7CCC8',
 				}
 			},
 			borderRadius: {
@@ -84,11 +108,25 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					from: { opacity: '0', transform: 'translateY(10px)' },
+					to: { opacity: '1', transform: 'translateY(0)' }
+				},
+				'fade-out': {
+					from: { opacity: '1' },
+					to: { opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'fade-out': 'fade-out 0.3s ease-out'
+			},
+			fontFamily: {
+				sans: ['Open Sans', 'sans-serif'],
+				playfair: ['"Playfair Display"', 'serif']
 			}
 		}
 	},
