@@ -35,19 +35,11 @@
  
     --radius: 0.5rem;
 
-    --prisona-50: 188 100% 95%;
-    --prisona-100: 188 100% 90%;
-    --prisona-200: 188 100% 80%;
-    --prisona-300: 188 100% 70%;
-    --prisona-400: 188 100% 60%;
-    --prisona-500: 188 100% 50%;
-    --prisona-600: 188 100% 40%;
-    --prisona-700: 188 100% 30%;
-    --prisona-800: 188 100% 20%;
-    --prisona-900: 188 100% 10%;
-
-    --organic-light: 142 50% 90%;
-    --organic-dark: 142 50% 30%;
+    --organic-dark: #4a8744;
+    --organic-light: #7dc142;
+    --prisona-500: #30A8C9;
+    --prisona-600: #208AAF;
+    --prisona-700: #106B92;
   }
  
   .dark {
@@ -90,11 +82,11 @@
   }
 }
 
-/* Remove scrollbar for webkit browsers */
+/* Remove scrollbar from webkit browsers but keep functionality */
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-  background: transparent; /* make scrollbar transparent */
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 /* For Firefox */
@@ -102,31 +94,7 @@ html {
   scrollbar-width: none;
 }
 
-/* For IE and Edge */
+/* For IE */
 body {
   -ms-overflow-style: none;
-}
-
-/* Make sure horizontal scrollbars are also hidden */
-* {
-  scrollbar-width: none;
-}
-
-.overflow-auto,
-.overflow-scroll,
-.overflow-x-auto,
-.overflow-x-scroll,
-.overflow-y-auto,
-.overflow-y-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.overflow-auto::-webkit-scrollbar,
-.overflow-scroll::-webkit-scrollbar,
-.overflow-x-auto::-webkit-scrollbar,
-.overflow-x-scroll::-webkit-scrollbar,
-.overflow-y-auto::-webkit-scrollbar,
-.overflow-y-scroll::-webkit-scrollbar {
-  display: none;
 }

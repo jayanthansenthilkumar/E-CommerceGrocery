@@ -88,7 +88,19 @@ const FarmerCoupons = () => {
   const [editingCoupon, setEditingCoupon] = useState<Coupon | null>(null);
   const { toast } = useToast();
   
-  const [formData, setFormData] = useState<Omit<Coupon, "id" | "usedCount" | "status">>({
+  // Define form data with proper types
+  interface FormData {
+    code: string;
+    type: "percentage" | "fixed";
+    value: number;
+    minAmount: number;
+    startDate: string;
+    endDate: string;
+    usageLimit: number | null;
+    productCategories: string[];
+  }
+  
+  const [formData, setFormData] = useState<FormData>({
     code: "",
     type: "percentage",
     value: 10,
@@ -107,7 +119,7 @@ const FarmerCoupons = () => {
     setFormData(prev => ({ 
       ...prev, 
       [name]: name === "value" || name === "minAmount" || name === "usageLimit" 
-        ? value === "" ? "" : Number(value)
+        ? value === "" ? null : Number(value)
         : value 
     }));
   };
