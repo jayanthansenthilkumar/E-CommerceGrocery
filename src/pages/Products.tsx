@@ -4,63 +4,106 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ProductCard from "@/components/product-card";
+import { Product } from "@/types/user";
 
 const Products = () => {
   // Mock products data - in a real app, this would come from an API
-  const products = [
+  const products: Product[] = [
     {
       id: "1",
       name: "Fresh Apples",
+      description: "Freshly picked apples from local orchards",
       price: 3.99,
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Green Farm",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80&w=500"],
+      category: "fruits",
+      vendorId: "v1",
       vendorType: "farmer",
+      vendorName: "Green Farm",
+      stock: 50,
       isOrganic: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "2",
       name: "Organic Carrots",
+      description: "Organic carrots grown without pesticides",
       price: 2.49,
-      image: "https://images.unsplash.com/photo-1598170845023-7d5aa3c13now?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Organic Harvest",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1598170845023-7d5aa3c13now?auto=format&fit=crop&q=80&w=500"],
+      category: "vegetables",
+      vendorId: "v2",
       vendorType: "shop_owner",
+      vendorName: "Organic Harvest",
+      stock: 100,
       isOrganic: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "3",
       name: "Brown Rice",
+      description: "Healthy whole grain brown rice",
       price: 4.99,
-      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Grocery World",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=500"],
+      category: "grains",
+      vendorId: "v3",
       vendorType: "shop_owner",
+      vendorName: "Grocery World",
+      stock: 200,
       isOrganic: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "4",
       name: "Organic Honey",
+      description: "Raw organic honey from local beekeepers",
       price: 7.99,
-      image: "https://images.unsplash.com/photo-1498936178812-4b2e558d2937?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Nature's Best",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1498936178812-4b2e558d2937?auto=format&fit=crop&q=80&w=500"],
+      category: "sweeteners",
+      vendorId: "v4",
       vendorType: "farmer",
+      vendorName: "Nature's Best",
+      stock: 30,
       isOrganic: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "5",
       name: "Fresh Tomatoes",
+      description: "Vine-ripened tomatoes picked at peak freshness",
       price: 2.99,
-      image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Green Farm",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=500"],
+      category: "vegetables",
+      vendorId: "v1",
       vendorType: "farmer",
+      vendorName: "Green Farm",
+      stock: 80,
       isOrganic: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "6",
       name: "Organic Eggs",
+      description: "Free-range organic eggs from pasture-raised hens",
       price: 5.49,
-      image: "https://images.unsplash.com/photo-1509479100390-67f4c1e4f4cc?auto=format&fit=crop&q=80&w=500",
-      vendorName: "Happy Hens",
+      discountPrice: undefined,
+      images: ["https://images.unsplash.com/photo-1509479100390-67f4c1e4f4cc?auto=format&fit=crop&q=80&w=500"],
+      category: "dairy",
+      vendorId: "v5",
       vendorType: "farmer",
+      vendorName: "Happy Hens",
+      stock: 60,
       isOrganic: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ];
 
@@ -103,13 +146,7 @@ const Products = () => {
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  vendorName={product.vendorName}
-                  vendorType={product.vendorType as 'shop_owner' | 'farmer'}
-                  isOrganic={product.isOrganic}
+                  product={product}
                 />
               ))}
             </div>
