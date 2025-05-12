@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, TruckDelivery, Mail, Phone, Calendar, CheckCircle, XCircle, MoreHorizontal } from "lucide-react";
+import { Search, Truck, Mail, Phone, Calendar, CheckCircle, XCircle, MoreHorizontal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   DropdownMenu,
@@ -15,51 +15,46 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// Mock delivery admins data
+// Mock shop owners data
 const mockDeliveryAdmins = [
   {
     id: "1",
-    name: "Dave Delivery Admin",
-    email: "delivery-admin@example.com",
+    name: "City Express Logistics",
+    adminName: "John Admin",
+    email: "admin@cityexpress.com",
     phone: "555-123-4567",
-    region: "East Zone",
-    joinDate: "2025-01-10",
-    status: "active",
-    agentsManaging: 8,
-    deliveriesProcessed: 356,
+    address: "123 Logistics Ave, San Francisco, CA",
+    joinDate: "2025-01-05",
+    status: "approved",
+    agentsCount: 12,
+    deliveriesCompleted: 358,
+    averageRating: 4.7
   },
   {
     id: "2",
-    name: "Elena Rodriguez",
-    email: "elena@example.com",
+    name: "Swift Delivery Co.",
+    adminName: "Sarah Swift",
+    email: "sarah@swiftdelivery.com",
     phone: "555-987-6543",
-    region: "West Zone",
-    joinDate: "2025-02-15",
-    status: "active",
-    agentsManaging: 5,
-    deliveriesProcessed: 245,
+    address: "456 Quick Road, Oakland, CA",
+    joinDate: "2025-02-12",
+    status: "approved",
+    agentsCount: 8,
+    deliveriesCompleted: 217,
+    averageRating: 4.5
   },
   {
     id: "3",
-    name: "Frank Johnson",
-    email: "frank@example.com",
+    name: "City Runners Logistics",
+    adminName: "Mike Runner",
+    email: "mike@cityrunners.com",
     phone: "555-456-7890",
-    region: "North Zone",
-    joinDate: "2025-04-05",
+    address: "789 Sprint Street, Berkeley, CA",
+    joinDate: "2025-03-30",
     status: "pending",
-    agentsManaging: 0,
-    deliveriesProcessed: 0,
-  },
-  {
-    id: "4",
-    name: "Grace Williams",
-    email: "grace@example.com",
-    phone: "555-789-0123",
-    region: "South Zone",
-    joinDate: "2025-03-20",
-    status: "active",
-    agentsManaging: 6,
-    deliveriesProcessed: 198,
+    agentsCount: 0,
+    deliveriesCompleted: 0,
+    averageRating: 0
   }
 ];
 
@@ -69,109 +64,94 @@ const AdminDeliveryAdmins = () => {
   const { toast } = useToast();
   
   // Filter delivery admins based on search
-  const filteredDeliveryAdmins = deliveryAdmins.filter(admin => {
+  const filteredAdmins = deliveryAdmins.filter(admin => {
     return searchTerm === "" || 
       admin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.adminName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       admin.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      admin.region.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      admin.phone.includes(searchTerm);
+      admin.address.toLowerCase().includes(searchTerm.toLowerCase());
   });
   
   const handleApproveAdmin = (adminId: string) => {
     setDeliveryAdmins(admins => admins.map(admin => 
-      admin.id === adminId ? { ...admin, status: "active" } : admin
+      admin.id === adminId ? { ...admin, status: "approved" } : admin
     ));
     
     toast({
-      title: "Admin approved",
-      description: "The delivery admin has been approved and activated.",
+      title: "Delivery admin approved",
+      description: "The delivery admin has been approved and can now operate on the platform.",
     });
   };
   
-  const handleBlockAdmin = (adminId: string) => {
+  const handleRejectAdmin = (adminId: string) => {
     setDeliveryAdmins(admins => admins.map(admin => 
-      admin.id === adminId ? { ...admin, status: "blocked" } : admin
+      admin.id === adminId ? { ...admin, status: "rejected" } : admin
     ));
     
     toast({
-      title: "Admin blocked",
-      description: "The delivery admin has been blocked from the platform.",
+      title: "Delivery admin rejected",
+      description: "The delivery admin has been rejected and will not be able to operate on the platform.",
       variant: "destructive"
     });
   };
   
-  const handleUnblockAdmin = (adminId: string) => {
+  const handleSuspendAdmin = (adminId: string) => {
     setDeliveryAdmins(admins => admins.map(admin => 
-      admin.id === adminId ? { ...admin, status: "active" } : admin
+      admin.id === adminId ? { ...admin, status: "suspended" } : admin
     ));
     
     toast({
-      title: "Admin unblocked",
-      description: "The delivery admin has been unblocked and can now access the platform.",
+      title: "Delivery admin suspended",
+      description: "The delivery admin has been suspended from the platform.",
+      variant: "destructive"
     });
-  };
-  
-  const getStatusBadgeColor = (status: string) => {
-    switch (status) {
-      case 'active': return 'bg-green-500';
-      case 'pending': return 'bg-amber-500';
-      case 'blocked': return 'bg-red-500';
-      default: return 'bg-gray-500';
-    }
   };
 
   return (
     <DashboardLayout
       title="Delivery Admins"
-      subtitle="Manage regional delivery administrators"
+      subtitle="Manage delivery admin companies on your platform"
     >
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div className="relative w-full sm:w-64 mb-4 sm:mb-0">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
           <Input
-            placeholder="Search admins..."
+            placeholder="Search delivery admins..."
             className="pl-10"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-        </div>
-        
-        <div className="w-full sm:w-auto flex space-x-2">
-          <Button className="flex items-center gap-2">
-            <TruckDelivery className="h-4 w-4" />
-            Add Delivery Admin
-          </Button>
         </div>
       </div>
       
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2">
-            <TruckDelivery className="h-5 w-5" />
-            Delivery Administrators
+            <Truck className="h-5 w-5" />
+            Delivery Admin Companies
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {filteredDeliveryAdmins.length > 0 ? (
+          {filteredAdmins.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b text-left">
-                    <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Admin</th>
+                    <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Company</th>
                     <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Contact</th>
-                    <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Region</th>
+                    <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Since</th>
                     <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Performance</th>
                     <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Status</th>
                     <th className="p-3 text-xs uppercase tracking-wider font-medium text-gray-500">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  {filteredDeliveryAdmins.map((admin) => (
+                  {filteredAdmins.map((admin) => (
                     <tr key={admin.id} className="hover:bg-gray-50">
                       <td className="p-3 whitespace-nowrap">
                         <div>
                           <div className="font-medium text-gray-900">{admin.name}</div>
-                          <div className="text-sm text-gray-500">ID: DA-{admin.id}</div>
+                          <div className="text-sm text-gray-500">{admin.adminName}</div>
                         </div>
                       </td>
                       <td className="p-3">
@@ -187,26 +167,35 @@ const AdminDeliveryAdmins = () => {
                         </div>
                       </td>
                       <td className="p-3 whitespace-nowrap">
-                        <div className="text-gray-600">{admin.region}</div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          Since {new Date(admin.joinDate).toLocaleDateString()}
+                        <div className="flex items-center text-gray-600">
+                          <Calendar className="h-4 w-4 mr-2" />
+                          {new Date(admin.joinDate).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="p-3 whitespace-nowrap">
-                        <div className="space-y-1">
-                          <div className="flex items-center">
-                            <span className="text-sm text-gray-500 mr-2">Agents:</span>
-                            <span className="font-medium">{admin.agentsManaging}</span>
+                      <td className="p-3">
+                        <div className="text-sm space-y-1">
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Agents:</span>
+                            <span className="font-medium">{admin.agentsCount}</span>
                           </div>
-                          <div className="flex items-center">
-                            <span className="text-sm text-gray-500 mr-2">Deliveries:</span>
-                            <span className="font-medium">{admin.deliveriesProcessed}</span>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Deliveries:</span>
+                            <span className="font-medium">{admin.deliveriesCompleted}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Rating:</span>
+                            <span className="font-medium">{admin.averageRating > 0 ? admin.averageRating.toFixed(1) : "N/A"}</span>
                           </div>
                         </div>
                       </td>
                       <td className="p-3 whitespace-nowrap">
                         <Badge 
-                          className={getStatusBadgeColor(admin.status)}
+                          className={
+                            admin.status === 'approved' ? 'bg-green-500' : 
+                            admin.status === 'pending' ? 'bg-amber-500' : 
+                            admin.status === 'rejected' ? 'bg-red-500' :
+                            'bg-gray-500'
+                          }
                         >
                           {admin.status.charAt(0).toUpperCase() + admin.status.slice(1)}
                         </Badge>
@@ -223,34 +212,42 @@ const AdminDeliveryAdmins = () => {
                               View Details
                             </DropdownMenuItem>
                             <DropdownMenuItem className="cursor-pointer">
-                              View Performance
+                              View Agents
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             {admin.status === 'pending' && (
+                              <>
+                                <DropdownMenuItem 
+                                  className="cursor-pointer text-green-600"
+                                  onClick={() => handleApproveAdmin(admin.id)}
+                                >
+                                  <CheckCircle className="h-4 w-4 mr-2" />
+                                  Approve
+                                </DropdownMenuItem>
+                                <DropdownMenuItem 
+                                  className="cursor-pointer text-red-600"
+                                  onClick={() => handleRejectAdmin(admin.id)}
+                                >
+                                  <XCircle className="h-4 w-4 mr-2" />
+                                  Reject
+                                </DropdownMenuItem>
+                              </>
+                            )}
+                            {admin.status === 'approved' && (
+                              <DropdownMenuItem 
+                                className="cursor-pointer text-amber-600"
+                                onClick={() => handleSuspendAdmin(admin.id)}
+                              >
+                                Suspend
+                              </DropdownMenuItem>
+                            )}
+                            {(admin.status === 'rejected' || admin.status === 'suspended') && (
                               <DropdownMenuItem 
                                 className="cursor-pointer text-green-600"
                                 onClick={() => handleApproveAdmin(admin.id)}
                               >
                                 <CheckCircle className="h-4 w-4 mr-2" />
-                                Approve Admin
-                              </DropdownMenuItem>
-                            )}
-                            {admin.status === 'active' && (
-                              <DropdownMenuItem 
-                                className="cursor-pointer text-red-600"
-                                onClick={() => handleBlockAdmin(admin.id)}
-                              >
-                                <XCircle className="h-4 w-4 mr-2" />
-                                Block Admin
-                              </DropdownMenuItem>
-                            )}
-                            {admin.status === 'blocked' && (
-                              <DropdownMenuItem 
-                                className="cursor-pointer text-green-600"
-                                onClick={() => handleUnblockAdmin(admin.id)}
-                              >
-                                <CheckCircle className="h-4 w-4 mr-2" />
-                                Unblock Admin
+                                Restore
                               </DropdownMenuItem>
                             )}
                           </DropdownMenuContent>
@@ -263,17 +260,11 @@ const AdminDeliveryAdmins = () => {
             </div>
           ) : (
             <div className="text-center py-10">
-              <TruckDelivery className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+              <Truck className="h-12 w-12 text-gray-300 mx-auto mb-4" />
               <p className="text-lg font-medium mb-2">No delivery admins found</p>
-              <p className="text-gray-500 mb-4">
-                {searchTerm ? "Try a different search term" : "Add your first delivery admin to get started"}
+              <p className="text-gray-500">
+                {searchTerm ? "Try a different search term" : "No delivery admin companies have registered yet"}
               </p>
-              {!searchTerm && (
-                <Button>
-                  <TruckDelivery className="h-4 w-4 mr-2" />
-                  Add Delivery Admin
-                </Button>
-              )}
             </div>
           )}
         </CardContent>

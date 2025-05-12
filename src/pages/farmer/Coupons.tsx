@@ -25,8 +25,23 @@ import {
 import { Tag, Clock, Percent, Plus, TicketPercent, Trash2, Edit, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
+// Define our Coupon type
+interface Coupon {
+  id: string;
+  code: string;
+  type: "percentage" | "fixed";
+  value: number;
+  minAmount: number;
+  startDate: string;
+  endDate: string;
+  usageLimit: number | null;
+  usedCount: number;
+  status: "active" | "expired" | "draft";
+  productCategories: string[];
+}
+
 // Mock coupon data
-const initialCoupons = [
+const initialCoupons: Coupon[] = [
   {
     id: "1",
     code: "FARM25",
@@ -67,20 +82,6 @@ const initialCoupons = [
     productCategories: ["Fruits"]
   }
 ];
-
-interface Coupon {
-  id: string;
-  code: string;
-  type: "percentage" | "fixed";
-  value: number;
-  minAmount: number;
-  startDate: string;
-  endDate: string;
-  usageLimit: number | null;
-  usedCount: number;
-  status: "active" | "expired" | "draft";
-  productCategories: string[];
-}
 
 const FarmerCoupons = () => {
   const [coupons, setCoupons] = useState<Coupon[]>(initialCoupons);

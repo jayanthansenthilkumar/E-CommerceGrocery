@@ -93,6 +93,7 @@
 /* Remove scrollbar for webkit browsers */
 ::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
   background: transparent; /* make scrollbar transparent */
 }
 
@@ -104,4 +105,28 @@ html {
 /* For IE and Edge */
 body {
   -ms-overflow-style: none;
+}
+
+/* Make sure horizontal scrollbars are also hidden */
+* {
+  scrollbar-width: none;
+}
+
+.overflow-auto,
+.overflow-scroll,
+.overflow-x-auto,
+.overflow-x-scroll,
+.overflow-y-auto,
+.overflow-y-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-auto::-webkit-scrollbar,
+.overflow-scroll::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+.overflow-x-scroll::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none;
 }
