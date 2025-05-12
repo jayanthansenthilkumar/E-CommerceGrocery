@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,10 +9,11 @@ import { AuthProvider } from "./contexts/auth-context";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Products from "./pages/Products";
-import Organic from "./pages/Organic";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Cart from "./pages/Cart";
+// The following pages currently don't exist in the codebase
+// import Organic from "./pages/Organic";
+// import About from "./pages/About";
+// import Contact from "./pages/Contact";
+// import Cart from "./pages/Cart";
 
 // Auth pages
 import Login from "./pages/auth/Login";
@@ -21,7 +21,7 @@ import Register from "./pages/auth/Register";
 import RegistrationPending from "./pages/auth/RegistrationPending";
 
 // Profile page
-import Profile from "./pages/profile/Profile";
+// import Profile from "./pages/profile/Profile";
 
 // Dashboard pages
 import CustomerDashboard from "./pages/dashboards/CustomerDashboard";
@@ -43,26 +43,26 @@ import ShopCustomers from "./pages/shop-owner/Customers";
 import ShopCoupons from "./pages/shop-owner/Coupons";
 
 // Farmer pages
-import FarmerProducts from "./pages/farmer/Products";
-import FarmerOrders from "./pages/farmer/Orders";
-import FarmerCustomers from "./pages/farmer/Customers";
-import FarmerCoupons from "./pages/farmer/Coupons";
+// import FarmerProducts from "./pages/farmer/Products";
+// import FarmerOrders from "./pages/farmer/Orders";
+// import FarmerCustomers from "./pages/farmer/Customers";
+// import FarmerCoupons from "./pages/farmer/Coupons";
 
 // Delivery agent pages
-import DeliveryAgentDeliveries from "./pages/delivery-agent/Deliveries";
-import DeliveryAgentHistory from "./pages/delivery-agent/History";
+// import DeliveryAgentDeliveries from "./pages/delivery-agent/Deliveries";
+// import DeliveryAgentHistory from "./pages/delivery-agent/History";
 
 // Delivery admin pages
-import DeliveryAdminAgents from "./pages/delivery-admin/Agents";
-import DeliveryAdminDeliveries from "./pages/delivery-admin/Deliveries";
-import DeliveryAdminReports from "./pages/delivery-admin/Reports";
+// import DeliveryAdminAgents from "./pages/delivery-admin/Agents";
+// import DeliveryAdminDeliveries from "./pages/delivery-admin/Deliveries";
+// import DeliveryAdminReports from "./pages/delivery-admin/Reports";
 
 // Admin pages
-import AdminShopOwners from "./pages/admin/ShopOwners";
-import AdminFarmers from "./pages/admin/Farmers";
-import AdminDeliveryAdmins from "./pages/admin/DeliveryAdmins";
-import AdminCustomers from "./pages/admin/Customers";
-import AdminSettings from "./pages/admin/Settings";
+// import AdminShopOwners from "./pages/admin/ShopOwners";
+// import AdminFarmers from "./pages/admin/Farmers";
+// import AdminDeliveryAdmins from "./pages/admin/DeliveryAdmins";
+// import AdminCustomers from "./pages/admin/Customers";
+// import AdminSettings from "./pages/admin/Settings";
 
 import "./App.css";
 
@@ -103,14 +103,15 @@ const App = () => (
             {/* Main routes */}
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/organic" element={<Organic />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
+            {/* Temporarily disable routes for pages that don't exist yet */}
+            {/* <Route path="/organic" element={<Organic />} /> */}
+            {/* <Route path="/about" element={<About />} /> */}
+            {/* <Route path="/contact" element={<Contact />} /> */}
+            {/* <Route path="/cart" element={<Cart />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/registration-pending" element={<RegistrationPending />} />
-            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/profile" element={<Profile />} /> */}
             
             {/* Customer routes */}
             <Route path="/customer/dashboard" element={<CustomerDashboard />} />
@@ -125,31 +126,34 @@ const App = () => (
             <Route path="/shop-owner/customers" element={<ShopCustomers />} />
             <Route path="/shop-owner/coupons" element={<ShopCoupons />} />
             
-            {/* Farmer routes */}
-            <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
+            {/* Farmer routes - temporarily disabled until components are created */}
+            {/* <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
             <Route path="/farmer/products" element={<FarmerProducts />} />
             <Route path="/farmer/orders" element={<FarmerOrders />} />
             <Route path="/farmer/customers" element={<FarmerCustomers />} />
-            <Route path="/farmer/coupons" element={<FarmerCoupons />} />
+            <Route path="/farmer/coupons" element={<FarmerCoupons />} /> */}
+            <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
             
-            {/* Delivery agent routes */}
-            <Route path="/delivery-agent/dashboard" element={<DeliveryAgentDashboard />} />
+            {/* Delivery agent routes - temporarily disabled */}
+            {/* <Route path="/delivery-agent/dashboard" element={<DeliveryAgentDashboard />} />
             <Route path="/delivery-agent/deliveries" element={<DeliveryAgentDeliveries />} />
-            <Route path="/delivery-agent/history" element={<DeliveryAgentHistory />} />
+            <Route path="/delivery-agent/history" element={<DeliveryAgentHistory />} /> */}
+            <Route path="/delivery-agent/dashboard" element={<DeliveryAgentDashboard />} />
             
-            {/* Delivery admin routes */}
-            <Route path="/delivery-admin/dashboard" element={<DeliveryAdminDashboard />} />
+            {/* Delivery admin routes - temporarily disabled */}
+            {/* <Route path="/delivery-admin/dashboard" element={<DeliveryAdminDashboard />} />
             <Route path="/delivery-admin/agents" element={<DeliveryAdminAgents />} />
             <Route path="/delivery-admin/deliveries" element={<DeliveryAdminDeliveries />} />
-            <Route path="/delivery-admin/reports" element={<DeliveryAdminReports />} />
+            <Route path="/delivery-admin/reports" element={<DeliveryAdminReports />} /> */}
+            <Route path="/delivery-admin/dashboard" element={<DeliveryAdminDashboard />} />
             
-            {/* Overall admin routes */}
+            {/* Overall admin routes - temporarily disabled */}
             <Route path="/admin/dashboard" element={<OverallAdminDashboard />} />
-            <Route path="/admin/shop-owners" element={<AdminShopOwners />} />
+            {/* <Route path="/admin/shop-owners" element={<AdminShopOwners />} />
             <Route path="/admin/farmers" element={<AdminFarmers />} />
             <Route path="/admin/delivery-admins" element={<AdminDeliveryAdmins />} />
             <Route path="/admin/customers" element={<AdminCustomers />} />
-            <Route path="/admin/settings" element={<AdminSettings />} />
+            <Route path="/admin/settings" element={<AdminSettings />} /> */}
             
             {/* 404 catch-all */}
             <Route path="*" element={<NotFound />} />

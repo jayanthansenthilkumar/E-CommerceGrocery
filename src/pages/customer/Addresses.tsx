@@ -4,6 +4,7 @@ import DashboardLayout from "@/components/dashboard/dashboard-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge"; // Added missing Badge import
 import { useToast } from "@/components/ui/use-toast";
 import { 
   Plus,
