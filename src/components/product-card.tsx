@@ -9,21 +9,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  // Add safety check to prevent accessing undefined properties
-  if (!product) {
-    return (
-      <div className="bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
-        <p className="text-center text-gray-500">Product information unavailable</p>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-all hover:shadow-lg">
       <Link to={`/product/${product.id}`}>
         <div className="relative h-48 bg-gray-100">
           <img
-            src={product.images?.[0] || "/placeholder.svg"}
+            src={product.images[0]}
             alt={product.name}
             className="w-full h-full object-contain"
           />
