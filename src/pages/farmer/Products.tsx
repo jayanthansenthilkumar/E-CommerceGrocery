@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/dashboard/dashboard-layout";
@@ -25,7 +24,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Search, Tag, PackageOpen, ShoppingBag, BarChart3, Edit, Trash2, Loader2, AlertTriangle, Archive } from "lucide-react";
+import { Plus, Search, Tag, PackageOpen, ShoppingBag, BarChart3, Edit, Trash2, Loader2, AlertTriangle, Archive, Eye } from "lucide-react";
 
 // Mock product data
 interface Product {

@@ -212,13 +212,16 @@ const FarmerCoupons = () => {
       return;
     }
     
-    if (typeof formData.value === 'number' && formData.value <= 0) {
-      toast({
-        title: "Error",
-        description: "Discount value must be greater than zero.",
-        variant: "destructive",
-      });
-      return;
+    if (typeof formData.value === 'number' || typeof formData.value === 'string') {
+      const valueAsNumber = Number(formData.value);
+      if (valueAsNumber <= 0) {
+        toast({
+          title: "Error",
+          description: "Discount value must be greater than zero.",
+          variant: "destructive",
+        });
+        return;
+      }
     }
     
     if (editingCoupon) {
@@ -228,8 +231,8 @@ const FarmerCoupons = () => {
           ? { 
               ...coupon, 
               ...formData,
-              usageLimit: formData.usageLimit === "" ? null : 
-                typeof formData.usageLimit === 'number' ? formData.usageLimit : null
+              usageLimit: formData.usageLimit === null || formData.usageLimit === "" ? null : 
+                typeof formData.usageLimit === 'string' ? parseInt(formData.usageLimit) : formData.usageLimit
             }
           : coupon
       ));
@@ -242,8 +245,8 @@ const FarmerCoupons = () => {
       const newCoupon: Coupon = {
         id: String(Math.floor(Math.random() * 10000)),
         ...formData,
-        usageLimit: formData.usageLimit === "" ? null : 
-          typeof formData.usageLimit === 'number' ? formData.usageLimit : null,
+        usageLimit: formData.usageLimit === null || formData.usageLimit === "" ? null : 
+          typeof formData.usageLimit === 'string' ? parseInt(formData.usageLimit) : formData.usageLimit,
         usedCount: 0,
         status: "active"
       };

@@ -15,6 +15,7 @@ export interface User {
   phoneNumber?: string;
   address?: string;
   isApproved?: boolean;
+  profileImage?: string;
   createdAt: Date;
   lastLogin?: Date;
 }

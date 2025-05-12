@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/auth-context";
@@ -112,7 +111,7 @@ const Profile = () => {
             <CardContent className="p-6">
               <div className="flex flex-col items-center text-center">
                 <Avatar className="h-24 w-24 mb-4">
-                  <AvatarImage src={user?.avatar} alt={user?.name} />
+                  <AvatarImage src={user?.profileImage} alt={user?.name} />
                   <AvatarFallback>
                     {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
                   </AvatarFallback>
