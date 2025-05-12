@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/dashboard/dashboard-layout";
@@ -212,16 +213,15 @@ const FarmerCoupons = () => {
       return;
     }
     
-    if (typeof formData.value === 'number' || typeof formData.value === 'string') {
-      const valueAsNumber = Number(formData.value);
-      if (valueAsNumber <= 0) {
-        toast({
-          title: "Error",
-          description: "Discount value must be greater than zero.",
-          variant: "destructive",
-        });
-        return;
-      }
+    // Fix the type comparison here - convert to number first if needed
+    const valueAsNumber = Number(formData.value);
+    if (valueAsNumber <= 0) {
+      toast({
+        title: "Error",
+        description: "Discount value must be greater than zero.",
+        variant: "destructive",
+      });
+      return;
     }
     
     if (editingCoupon) {
@@ -231,8 +231,9 @@ const FarmerCoupons = () => {
           ? { 
               ...coupon, 
               ...formData,
-              usageLimit: formData.usageLimit === null || formData.usageLimit === "" ? null : 
-                typeof formData.usageLimit === 'string' ? parseInt(formData.usageLimit) : formData.usageLimit
+              // Fix the type issue by ensuring usageLimit is properly converted
+              usageLimit: formData.usageLimit === null ? null : 
+                Number(formData.usageLimit)
             }
           : coupon
       ));
@@ -245,8 +246,9 @@ const FarmerCoupons = () => {
       const newCoupon: Coupon = {
         id: String(Math.floor(Math.random() * 10000)),
         ...formData,
-        usageLimit: formData.usageLimit === null || formData.usageLimit === "" ? null : 
-          typeof formData.usageLimit === 'string' ? parseInt(formData.usageLimit) : formData.usageLimit,
+        // Fix the type issue by ensuring usageLimit is properly converted
+        usageLimit: formData.usageLimit === null ? null : 
+          Number(formData.usageLimit),
         usedCount: 0,
         status: "active"
       };
